@@ -1,0 +1,93 @@
+#!/bin/bash
+#SBATCH --job-name=trim_galore_control             # Job name
+#SBATCH --partition=batch             # Partition (queue) name
+#SBATCH --ntasks=1                    # Run a single task
+#SBATCH --mem=64gb                     # Job memory request
+#SBATCH --time=100:00:00               # Time limit hrs:min:sec
+#SBATCH --output=trim_control.%j.out        # Standard output log
+#SBATCH --error=trim_control.%j.err         # Standard error log
+
+#SBATCH --mail-type=END,FAIL          # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=gb92068@uga.edu  # Where to send mail
+
+out="/scratch/gb92068/RNA_seq_updated/trim_galore/trimmed/"
+reads="/scratch/gb92068/RNA_seq_updated/raw_reads/"
+
+cd $SLURM_SUBMIT_DIR
+
+ml Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4  
+
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXBR_RNAseq_3_Control_1_24hr_TACCGAGG_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXBR_RNAseq_3_Control_1_24hr_TACCGAGG_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXBS_RNAseq_4_Control_1_48hr_CGTTAGAA_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXBS_RNAseq_4_Control_1_48hr_CGTTAGAA_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXBT_RNAseq_6_Control_1_96hr_AGCCTCAT_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXBT_RNAseq_6_Control_1_96hr_AGCCTCAT_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXBU_RNAseq_10_Control_2_24hr_GATTCTGC_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXBU_RNAseq_10_Control_2_24hr_GATTCTGC_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXBW_RNAseq_11_Control_2_48hr_TCGTAGTG_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXBW_RNAseq_11_Control_2_48hr_TCGTAGTG_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXBX_RNAseq_13_Control_2_96hr_CTACGACA_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXBX_RNAseq_13_Control_2_96hr_CTACGACA_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXBY_RNAseq_17_Control_3_24hr_TAAGTGGT_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXBY_RNAseq_17_Control_3_24hr_TAAGTGGT_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXBZ_RNAseq_18_Control_3_48hr_CGGACAAC_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXBZ_RNAseq_18_Control_3_48hr_CGGACAAC_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCA_RNAseq_20_Control_3_96hr_ATATGGAT_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCA_RNAseq_20_Control_3_96hr_ATATGGAT_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+
+
+
+
+#!/bin/bash
+#SBATCH --job-name=trim_galore_De-Tif-11             # Job name
+#SBATCH --partition=batch             # Partition (queue) name
+#SBATCH --ntasks=1                    # Run a single task
+#SBATCH --mem=64gb                     # Job memory request
+#SBATCH --time=100:00:00               # Time limit hrs:min:sec
+#SBATCH --output=trim_De-Tif-11.%j.out        # Standard output log
+#SBATCH --error=trim_De-Tif-11.%j.err         # Standard error log
+
+#SBATCH --mail-type=END,FAIL          # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=gb92068@uga.edu  # Where to send mail
+
+out="/scratch/gb92068/RNA_seq_updated/trim_galore/trimmed/"
+reads="/scratch/gb92068/RNA_seq_updated/raw_reads/"
+
+cd $SLURM_SUBMIT_DIR
+
+ml Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4  
+
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCK_RNAseq_45_De-Tif-11_1_24hr_AACAGGTT_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCK_RNAseq_45_De-Tif-11_1_24hr_AACAGGTT_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCL_RNAseq_46_De-Tif-11_1_48hr_GGTGAACC_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCL_RNAseq_46_De-Tif-11_1_48hr_GGTGAACC_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCM_RNAseq_48_De-Tif-11_1_96hr_CAACAATG_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCM_RNAseq_48_De-Tif-11_1_96hr_CAACAATG_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCN_RNAseq_52_De-Tif-11_2_24hr_TGGTGGCA_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCN_RNAseq_52_De-Tif-11_2_24hr_TGGTGGCA_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCP_RNAseq_53_De-Tif-11_2_48hr_AGGCAGAG_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCP_RNAseq_53_De-Tif-11_2_48hr_AGGCAGAG_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCQ_RNAseq_55_De-Tif-11_2_96hr_GAATGAGA_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCQ_RNAseq_55_De-Tif-11_2_96hr_GAATGAGA_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCR_RNAseq_59_De-Tif-11_3_24hr_TGCGGCGT_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCR_RNAseq_59_De-Tif-11_3_24hr_TGCGGCGT_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCS_RNAseq_60_De-Tif-11_3_48hr_CATAATAC_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCS_RNAseq_60_De-Tif-11_3_48hr_CATAATAC_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCT_RNAseq_62_De-Tif-11_3_96hr_GATCTATC_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCT_RNAseq_62_De-Tif-11_3_96hr_GATCTATC_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+
+
+
+#!/bin/bash
+#SBATCH --job-name=trim_galore_Pa-OK-11             # Job name
+#SBATCH --partition=batch             # Partition (queue) name
+#SBATCH --ntasks=1                    # Run a single task
+#SBATCH --mem=64gb                     # Job memory request
+#SBATCH --time=100:00:00               # Time limit hrs:min:sec
+#SBATCH --output=trim_Pa-OK-11.%j.out        # Standard output log
+#SBATCH --error=trim_Pa-OK-11.%j.err         # Standard error log
+
+#SBATCH --mail-type=END,FAIL          # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=gb92068@uga.edu  # Where to send mail
+
+out="/scratch/gb92068/RNA_seq_updated/trim_galore/trimmed/"
+reads="/scratch/gb92068/RNA_seq_updated/raw_reads/"
+
+cd $SLURM_SUBMIT_DIR
+
+ml Trim_Galore/0.6.5-GCCcore-8.3.0-Java-11-Python-3.7.4  
+
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCB_RNAseq_24_Pa-OK-11_1_24hr_GCGCAAGC_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCB_RNAseq_24_Pa-OK-11_1_24hr_GCGCAAGC_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCC_RNAseq_25_Pa-OK-11_1_48hr_AAGATACT_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCC_RNAseq_25_Pa-OK-11_1_48hr_AAGATACT_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCD_RNAseq_27_Pa-OK-11_1_96hr_GGAGCGTC_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCD_RNAseq_27_Pa-OK-11_1_96hr_GGAGCGTC_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCE_RNAseq_31_Pa-OK-11_2_24hr_ATGGCATG_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCE_RNAseq_31_Pa-OK-11_2_24hr_ATGGCATG_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCF_RNAseq_32_Pa-OK-11_2_48hr_GCAATGCA_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCF_RNAseq_32_Pa-OK-11_2_48hr_GCAATGCA_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCG_RNAseq_34_Pa-OK-11_2_96hr_GTTCCAAT_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCG_RNAseq_34_Pa-OK-11_2_96hr_GTTCCAAT_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCH_RNAseq_38_Pa-OK-11_3_24hr_ACCTTGGC_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCH_RNAseq_38_Pa-OK-11_3_24hr_ACCTTGGC_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCI_RNAseq_39_Pa-OK-11_3_48hr_ATATCTCG_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCI_RNAseq_39_Pa-OK-11_3_48hr_ATATCTCG_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+trim_galore --paired -q 30 --length 36 --gzip --fastqc $reads/IXCJ_RNAseq_41_Pa-OK-11_3_96hr_GCGCTCTA_Carya_illinoinensis_I972_L2_R1.fastq $reads/IXCJ_RNAseq_41_Pa-OK-11_3_96hr_GCGCTCTA_Carya_illinoinensis_I972_L2_R2.fastq --output_dir $out
+
+
