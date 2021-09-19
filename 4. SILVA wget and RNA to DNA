@@ -22,3 +22,7 @@ more SILVA_138.1_LSURef_tax_silva.fasta | awk '/^>/ {printf("%s%s\t",(N>0?"\n":"
 
 
 ## Then manually removed the header with different symbol with nano filename.fasta
+
+Finally combine two fasta files in one signle file.
+
+cat SILVA_138.1_* > SILVA_138.1_LSURef_SSURef.fasta
