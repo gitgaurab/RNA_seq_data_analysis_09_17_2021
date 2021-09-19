@@ -1,0 +1,24 @@
+wget https://www.arb-silva.de/fileadmin/silva_databases/release_138.1/Exports/SILVA_138.1_LSURef_tax_silva.fasta.gz
+wget https://www.arb-silva.de/fileadmin/silva_databases/release_138.1/Exports/SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz
+
+gunzip SILVA_138.1_LSURef_tax_silva.fasta.gz
+gunzip SILVA_138.1_SSURef_NR99_tax_silva.fasta.gz
+
+## Running following script to change U to T.
+
+#!/bin/bash
+#SBATCH --job-name=SILVA_RNA2DNA
+#SBATCH --partition=highmem_p
+#SBATCH --ntasks=1
+#SBATCH --mem=100gb
+#SBATCH --time=20:00:00
+#SBATCH --output=RNA2DNA.%j.out
+#SBATCH --error=RNAtoDNA.%j.err
+
+cd $SLURM_SUBMIT_DIR
+
+more SILVA_138.1_SSURef_NR99_tax_silva.fasta | awk '/^>/ {printf("%s%s\t",(N>0?"\n":""),$0);N++;next;} {printf("%s",$0);} END {printf("\n");}'| sed 's/\t/\n/g'| while read L; do echo $L; read L; echo "$L" | tr "U" "T"; done > SILVA_138.1_SSURef_NR99_tax_silva_DNA.fasta
+more SILVA_138.1_LSURef_tax_silva.fasta | awk '/^>/ {printf("%s%s\t",(N>0?"\n":""),$0);N++;next;} {printf("%s",$0);} END {printf("\n");}'| sed 's/\t/\n/g'| while read L; do echo $L; read L; echo "$L" | tr "U" "T"; done > SILVA_138.1_LSURef_tax_silva_DNA.fasta
+
+
+## Then manually removed the header with different symbol with nano filename.fasta
