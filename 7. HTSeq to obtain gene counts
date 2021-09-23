@@ -1,0 +1,62 @@
+####NOTE: The gff3 file was fist converted into GTF format file using following script####
+## -- unzip gff3 file
+gunzip -d CillinoinensisPawnee_588_v1.1.gene_exons.gff3.gz
+
+## -- use gffread from CUFFLINKS to generate GTF file (http://cole-trapnell-lab.github.io/cufflinks/file_formats/#the-gffread-utility
+
+ml gffread/0.11.6-GCCcore-8.3.0
+gffread -E CillinoinensisPawnee_588_v1.1.gene_exons.gff3 -T -o CillinoinensisPawnee_588_v1.1.gene_exons.gtf
+
+
+## Now run HTSeq (Note this script was separated into three subscripts to make the job run faster)
+
+
+#!/bin/bash
+#SBATCH --job-name=htseq            # Job name
+#SBATCH --partition=highmem_p             # Partition (queue) name
+#SBATCH --ntasks=1                    # Run a single task
+#SBATCH --mem=100gb                     # Job memory request
+#SBATCH --time=100:00:00               # Time limit hrs:min:sec
+#SBATCH --output=htseq.%j.out        # Standard output log
+#SBATCH --error=htseq.%j.err         # Standard error log
+
+#SBATCH --mail-type=END,FAIL          # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=gb92068@uga.edu  # Where to send mail
+
+
+gtf="/scratch/gb92068/RNA_seq_updated/mapping/pawnee/genome_downloads/CillinoinensisPawnee_588_v1.1.gene_exons.gtf"
+bam="/scratch/gb92068/RNA_seq_updated/mapping/pawnee/bowtie_STAR_mapping/starout_pecan/"
+outdir="/scratch/gb92068/RNA_seq_updated/mapping/pawnee/bowtie_STAR_mapping/htseq/htseq_out/"
+
+
+cd $SLURM_SUBMIT_DIR
+
+ml HTSeq/0.13.5-foss-2019b-Python-3.7.4
+
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_1_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_1_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_1_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_1_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_1_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_1_96hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_2_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_2_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_2_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_2_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_2_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_2_96hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_3_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_3_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_3_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_3_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Control_3_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Control_3_96hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_1_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_1_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_1_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_1_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_1_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_1_96hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_2_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_2_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_2_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_2_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_2_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_2_96hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_3_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_3_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_3_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_3_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/De-Tif-11_3_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/De-Tif-11_3_96hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_1_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_1_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_1_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_1_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_1_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_1_96hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_2_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_2_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_2_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_2_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_2_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_2_96hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_3_24hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_3_24hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_3_48hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_3_48hr.htseq.counts
+htseq-count -f bam -r pos -s reverse -t exon -i gene_id $bam/Pa-OK-11_3_96hrAligned.sortedByCoord.out.bam $gtf --minaqual 10 > $outdir/Pa-OK-11_3_96hr.htseq.counts
